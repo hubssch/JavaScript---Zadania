@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Drum Kit</title>
+</head>
+<body>
+    <div class="channel-controls">
+        <div>
+            <button onclick="setChannel(0)">Ustaw kanał 1</button>
+            <input type="checkbox" name="isChannelChecked" id="0">Play</input>
+        </div>
+        <div>
+            <button onclick="setChannel(1)">Ustaw kanał 2</button>
+            <input type="checkbox" name="isChannelChecked" id="1">Play</input>
+        </div>
+        <div>
+            <button onclick="setChannel(2)">Ustaw kanał 3</button>
+            <input type="checkbox" name="isChannelChecked" id="2">Play</input>
+        </div>
+        <div>
+            <button onclick="setChannel(3)">Ustaw kanał 4</button>
+            <input type="checkbox" name="isChannelChecked" id="3">Play</input>
+        </div>
+        <button onclick="play()">Odtwórz</button>
+    </div>
+    <div class="drum-buttons">
+        <button class="drum-button" data-key="KeyQ">Q</button>
+        <button class="drum-button" data-key="KeyW">W</button>
+        <button class="drum-button" data-key="KeyE">E</button>
+        <button class="drum-button" data-key="KeyA">A</button>
+        <button class="drum-button" data-key="KeyS">S</button>
+        <button class="drum-button" data-key="KeyD">D</button>
+        <button class="drum-button" data-key="KeyZ">Z</button>
+        <button class="drum-button" data-key="KeyX">X</button>
+        <button class="drum-button" data-key="KeyC">C</button>
+    </div>
+    <div class="audio-controls">
+        <audio src="./sounds/boom.wav" id="boom"></audio>
+        <audio src="./sounds/clap.wav" id="clap"></audio>
+        <audio src="./sounds/hihat.wav" id="hihat"></audio>
+        <audio src="./sounds/kick.wav" id="kick"></audio>
+        <audio src="./sounds/openhat.wav" id="openhat"></audio>
+        <audio src="./sounds/ride.wav" id="ride"></audio>
+        <audio src="./sounds/snare.wav" id="snare"></audio>
+        <audio src="./sounds/tink.wav" id="tink"></audio>
+        <audio src="./sounds/tom.wav" id="tom"></audio>
+    </div>
+
+    <script src="drumkit.js"></script>
+</body>
+</html>

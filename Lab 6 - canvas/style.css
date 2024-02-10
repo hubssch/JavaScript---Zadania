@@ -1,0 +1,42 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+label {
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+input {
+    width: 50px
+}
+
+canvas {
+    width: calc(100% - 2px);
+    height: 90%;
+    border: 1px solid black;
+}
+
+#canvasControls {
+    display: flex;
+    width: 100%;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    width: min-content;
+}
+
+#canvasControls {
+    display: flex;
+    width: 100%;
+}
+
+.controls_param {
+    display: flex;
+    width: fit-content;
+}

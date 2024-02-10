@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notatnik</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Notatnik</h1>
+    </header>
+
+    <main>
+      <section id="add-note">
+        <h2>Dodaj nową notatkę</h2>
+        <form id="add-form">
+          <input type="text" id="title" placeholder="Tytuł" required />
+          <textarea
+            id="content"
+            placeholder="Treść notatki"
+            required
+          ></textarea>
+          <input type="color" id="color" value="#ffffff" />
+          <button type="submit">Dodaj</button>
+        </form>
+      </section>
+
+      <section id="notes">
+        <h2>Twoje notatki</h2>
+        <div id="notes-list"></div>
+      </section>
+    </main>
+
+    <script src="main.js"></script>
+  </body>
+</html>
