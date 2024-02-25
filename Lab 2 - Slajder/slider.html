@@ -3,31 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <style>
-      body {
-        background-color: #222222;
-        font-size: 24px;
-        color: white;
-      }
-      #slider {
-        width: 100px;
-        height: 110px;
-      }
-      .slide {
-        width: 900px;
-        height: 900px;
-      }
-    </style>
-    <script type="text/javascript" src="slider.js"></script>
   </head>
-  <body onload="changeSlide()">
-    <span onclick="setSlide(1)" style="cursor: pointer">[1]</span>
-    <span onclick="setSlide(2)" style="cursor: pointer">[2]</span>
-    <span onclick="setSlide(3)" style="cursor: pointer">[3]</span>
-    <span onclick="setSlide(4)" style="cursor: pointer">[4]</span>
-    <span onclick="setSlide(5)" style="cursor: pointer">[5]</span>
-    <div id="slider"></div>
+  <body>
+    <div id="slider">
+      <div class="slides-container">
+        <div class="carousel">
+          <div class="slide">
+            <img src="slajdy/slajd1.jpg" alt="Slajd 1" />
+          </div>
+          <div class="slide">
+            <img src="slajdy/slajd2.jpg" alt="Slajd 2" />
+          </div>
+          <div class="slide">
+            <img src="slajdy/slajd3.jpg" alt="Slajd 3" />
+          </div>
+          <div class="slide">
+            <img src="slajdy/slajd4.jpg" alt="Slajd 4" />
+          </div>
+          <div class="slide">
+            <img src="slajdy/slajd5.jpg" alt="Slajd 5" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button id="prev" type="button">Prev</button>
+        <button id="nr1">1</button>
+        <button id="nr2">2</button>
+        <button id="nr3">3</button>
+        <button id="nr4">4</button>
+        <button id="nr5">5</button>
+        <button id="next" type="button">Next</button>
+      </div>
+
+      <script src="slider.js" defer></script>
+    </div>
   </body>
 </html>

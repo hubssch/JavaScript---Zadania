@@ -1,27 +1,52 @@
-let slide = Math.floor(Math.random() * 5) + 1;
-let timer1 = 0;
-let timer2 = 0;
+const prevBtn = document.querySelector('#prev');
+const nextBtn = document.querySelector("#next");
+const one = document.querySelector('#nr1');
+const two = document.querySelector('#nr2');
+const three = document.querySelector('#nr3');
+const four = document.querySelector('#nr4');
+const five = document.querySelector('#nr5');
 
-function setSlide(sliderNr) {
-    clearTimeout(timer1);
-    clearTimeout(timer2);
-    slide = sliderNr - 1;
-    hide();
-    setTimeout(changeSlide, 500);
+
+const carousel = document.querySelector('.carousel');
+
+const SLIDES_LENGTH = 5;
+const SLIDE_WIDTH = 600;
+
+let currentSlide = 0;
+
+function setSlide(sliderNr)
+{
+   currentSlide = (sliderNr + SLIDES_LENGTH) % SLIDES_LENGTH;
+   // console.log("cyrren", currentSlide);
+   carousel.style.transform = `translateX(-${currentSlide * SLIDE_WIDTH}px)`;
+
+   // console.log("slideNr", sliderNr);
 }
 
-function hide() {
-    $("#slider").fadeOut(500);
-}
+prevBtn.addEventListener("click",() => {
+   setSlide(currentSlide - 1);
+})
 
-function changeSlide() {
-    slide++;
-    if (slide > 5) {
-        slide = 1;
-    }
-    let file = "<img class=\"slide\" src=\"slajdy/slajd" + slide + ".jpg\" />";
-    document.getElementById("slider").innerHTML = file;
-    $("#slider").fadeIn(500);
-    timer1 = setTimeout(changeSlide, 5000);
-    timer2 = setTimeout(hide, 4500);
-}
+nextBtn.addEventListener("click", () => {
+   setSlide(currentSlide + 1);
+})
+
+one.addEventListener("click", () => {
+    setSlide(0);
+} )
+
+two.addEventListener("click", () => {
+    setSlide(1);
+} )
+
+three.addEventListener("click", () => {
+    setSlide(2);
+} )
+
+four.addEventListener("click", () => {
+    setSlide(3);
+} )
+
+five.addEventListener("click", () => {
+    setSlide(4);
+} )
