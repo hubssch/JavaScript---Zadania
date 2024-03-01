@@ -1,70 +1,76 @@
-const input = document.querySelector('input');
-const button = document.querySelector('button');
-const cityName = document.querySelector('.city-name');
-const warning = document.querySelector('.warning');
-const photo = document.querySelector('.photo');
-const weather = document.querySelector('.weather');
-const temperature = document.querySelector('.temperature');
-const humidity = document.querySelector('.humidity');
-
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather?q=';
 const API_KEY = '&appid=e1df93e0e8453a9d253ec01b10f0377d';
 const API_UNITS = '&units=metric';
+let weathers = [];
+const weathersElements = document.querySelector('#weathers')
 
-button.addEventListener('click', getWeather);
-input.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') {
-        getWeather();
-    }
+const input = document.querySelector('#cityInput')
+
+async function getWeather(city) {
+    const URL = API_LINK + city + API_KEY + API_UNITS;
+    const response = await fetch(URL)
+    const responseJSON = await response.json(); 
+    return responseJSON;
+}
+
+document.querySelector('#submitBtn').addEventListener('click', async () => {
+    if(input.value === '') return alert('Please enter a city name');
+    else if (weathers.length >= 10) return alert('You can only check 10 cities at once');
+
+    addWeather();
 });
 
-function getWeather() {
-    const city = input.value;
-    const URL = API_LINK + city + API_KEY + API_UNITS;
+async function addWeather() {
+    const value = input.value;
+    const response = await getWeather(value);
 
-    fetch(URL)
-        .then(response => response.json())
-        .then(data => {
-            displayWeather(data);
-        })
-        .catch(() => {
-            warning.textContent = 'Wpisz poprawną nazwę miasta';
-        });
+    weathers.push(response);
+
+    saveToStorage();
+    renderWeathers();
 }
 
-function displayWeather(data) {
-    const temp = data.main.temp;
-    const hum = data.main.humidity;
-    const status = data.weather[0].main;
-
-    setWeatherIcon(status);
-
-    cityName.textContent = data.name;
-    temperature.textContent = `${Math.round(temp)}°C`;
-    humidity.textContent = `${hum}%`;
-    weather.textContent = status;
-
-    input.value = '';
+const deleteWeather = (index) => {
+    weathers.splice(index, 1);
+    saveToStorage();
+    renderWeathers();
 }
 
-function setWeatherIcon(status) {
-    let iconSrc = './img/unknown.png';
+function renderWeathers ()
+{
+    weathersElements.innerHTML = '';
 
-    if (status.includes('Thunderstorm')) {
-        iconSrc = './img/thunderstorm.png';
-    } else if (status.includes('Drizzle')) {
-        iconSrc = './img/drizzle.png';
-    } else if (status.includes('Rain')) {
-        iconSrc = './img/rain.png';
-    } else if (status.includes('Snow')) {
-        iconSrc = './img/ice.png';
-    } else if (status.includes('Mist') || status.includes('Fog')) {
-        iconSrc = './img/fog.png';
-    } else if (status === 'Clear') {
-        iconSrc = './img/sun.png';
-    } else if (status.includes('Clouds')) {
-        iconSrc = './img/cloud.png';
+    for (let i = 0; i < weathers.length; i++) {
+        weathersElements.insertAdjacentHTML("beforeend", 
+        `<div class="weather-info">
+            <p class="weather">
+                <img src="http://openweathermap.org/img/wn/${weathers[i].weather[0]?.icon}.png" alt="weather icon">
+            </p>
+            <p class="temperature">${weathers[i].main.temp}</p>
+            <p class="humidity">${weathers[i].main.humidity}</p>
+            <p class="city">${weathers[i].name}</p>
+            <button type="button" onclick="deleteWeather(${i})">Remove</button>
+        </div>`)
+    } 
+} 
+
+function getFromStorage() {
+    const weathers = localStorage.getItem('weathers');
+    return JSON.parse(weathers);
+}
+
+function saveToStorage() {
+    localStorage.setItem('weathers', JSON.stringify(weathers));
+}
+
+function init() {
+    const weathersFromStorage = getFromStorage();
+
+    if(weathersFromStorage) {
+        weathers = weathersFromStorage;
+        renderWeathers();
     }
-
-    photo.setAttribute('src', iconSrc);
 }
+
+
+init();
