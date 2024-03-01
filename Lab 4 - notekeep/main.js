@@ -35,9 +35,21 @@ const editNote = (index) => {
     editID = note.id;
 }
 
+const pinNote = (index) => {
+    let notes = JSON.parse(localStorage.getItem('notes'))
+    let note = notes[index];
+    note.pinned = true;
+    localStorage.setItem('notes', JSON.stringify(notes));
+    renderNotes();
+}
+
 const renderNotes = () => {
     notesList.innerHTML = '';
     let notes = JSON.parse(localStorage.getItem('notes')) || [];
+    notes.sort( (a, b) => {
+        console.log(a);
+        return b.pinned-a.pinned
+    })
     notes.forEach((note, index) => {
         const noteEl = document.createElement('div');
         noteEl.classList.add('note');
@@ -46,8 +58,10 @@ const renderNotes = () => {
             <h3>${note.title}</h3>
             <p>${note.content}</p>
             <p>${note.date}</p>
+            <p>${note.pinned}</p>
             <button class="delete-btn">Usuń</button>
-            <button class="edit-btn">Edytuj</button>`;
+            <button class="edit-btn">Edytuj</button>
+            <button class="pin-btn">Pin</button>`;
         noteEl.innerHTML = noteContent;
         noteEl.querySelector('.delete-btn').addEventListener('click', () => {
             deleteNote(index);
@@ -55,6 +69,9 @@ const renderNotes = () => {
         noteEl.querySelector('.edit-btn').addEventListener('click', () => {
             editNote(index);
         });
+        noteEl.querySelector(".pin-btn").addEventListener('click', () => {
+            pinNote(index);
+        })
         notesList.appendChild(noteEl);
     });
 };
@@ -72,3 +89,4 @@ addForm.addEventListener('submit', (e) => {
 });
 
 renderNotes();
+
