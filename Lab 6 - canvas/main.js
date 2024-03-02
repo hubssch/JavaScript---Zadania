@@ -86,5 +86,3 @@ function drawLine(ball1, ball2) {
     ctx.strokeStyle = "blue";
     ctx.stroke();
 }
-
-toggleAnimation();

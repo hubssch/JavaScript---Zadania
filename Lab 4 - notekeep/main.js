@@ -89,4 +89,3 @@ addForm.addEventListener('submit', (e) => {
 });
 
 renderNotes();
-
